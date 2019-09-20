@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="vue.js" type="text/javascript" charset="utf-8"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
 </head>
 <body>
     <div id="app">
         {{ message }} {{ name }}
+    </div>
+    <div id="app2">
+        {{ a }}
+        {{ b }}
     </div>
     <script type="text/javascript">
         var app = new Vue({
@@ -16,7 +21,26 @@
                 message: 'Hello Vue!',
                 name: "Vue"
             }
-        })
+        });
+
+        var data = { a : 1 };
+        var vm = new Vue({
+            el: '#app2',
+            data: data
+        });
+        // data.a = "hello vue..."
+        vm.a = "test";
+        data.a === vm.a;
+
+        vm.b = "test b";
+        data.b = "test bbbb"; // 想要某个变量或属性能够响应式的，需要在 new Vue 时将该变量提前声明
+
+        vm.$data.a = "hello $data";
+
+        // 为什么未生效
+        // vm.$watch('a', function (newVal, oldVal) {
+        //     console.log(newVal, oldVal)
+        // })
     </script>
 </body>
 </html>
